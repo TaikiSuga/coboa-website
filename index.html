@@ -53,18 +53,28 @@
             align-items: center;
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--text-color);
             text-decoration: none;
         }
 
+        .logo img {
+            height: 40px;
+            margin-right: 0.5rem;
+        }
+
+        /* 画像ロゴがない場合のフォールバック */
         .logo::before {
             content: '';
             width: 0;
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-bottom: 14px solid var(--primary-color);
+            border-bottom: 14px solid var(--text-color);
             margin-right: 0.5rem;
+        }
+
+        .logo:has(img)::before {
+            display: none;
         }
 
         .nav {
@@ -441,7 +451,11 @@
     <!-- ヘッダー -->
     <header class="header">
         <div class="header-container">
-            <a href="#" class="logo">coboa</a>
+            <a href="#" class="logo">
+                <!-- 画像ロゴを使用する場合は下記のコメントアウトを外して、images/coboa-logo.png に画像を配置してください -->
+                <!-- <img src="images/coboa-logo.png" alt="coboa"> -->
+                coboa
+            </a>
             <nav>
                 <ul class="nav">
                     <li><a href="#services">事業内容</a></li>
