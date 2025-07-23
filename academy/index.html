@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coboa academy｜君だけの、"挑戦"を記そう。</title>
+    <meta name="description" content="小中高生のアスリートが目標を持ち、考え、記録するアプリ「coboa academy」。スマホで簡単に目標達成のプロセスを可視化し、スポーツから学ぶ成長ストーリーを作ろう。">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #DC2626;
+            --text-color: #333;
+            --background-white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e5e7eb;
+            --box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            padding-bottom: 80px;
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 10px solid var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .academy-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .company-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .company-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* ヒーロー */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), 
+                        url('https://via.placeholder.com/1920x1080/4a90e2/ffffff?text=Athletics+Track+Background') center/cover;
+            /* TODO: 陸上トラックの写真に差し替え予定 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 2rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        /* セクション共通 */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* サービス概要 */
+        .service-overview {
+            background: var(--gray-light);
+        }
+
+        .service-description {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        /* 課題提示 */
+        .problems {
+            background: white;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .problem-illustration {
+            width: 100px;
+            height: 100px;
+            background: var(--gray-medium);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .problem-card p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* 3ステップ */
+        .steps {
+            background: var(--gray-light);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.4rem;
+            margin: 1rem 0;
+            color: var(--text-color);
+        }
+
+        .step-card p {
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* 導入実績 */
+        .testimonials {
+            background: white;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-title {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .review-location {
+            margin-left: auto;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .reviewer {
+            text-align: right;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* CTA セクション */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), #b91c1c);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section .section-title {
+            color: white;
+        }
+
+        .cta-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* FAQ */
+        .faq {
+            background: var(--gray-light);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.5rem 2rem;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-light);
+        }
+
+        .faq-answer {
+            padding: 0 2rem 1.5rem;
+            display: none;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-email {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: white;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .footer-button:hover {
+            background: var(--gray-light);
+        }
+
+        /* 固定フッター CTA */
+        .fixed-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-color);
+            z-index: 999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .fixed-cta-content {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .fixed-cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .fixed-cta-button:hover {
+            background: var(--gray-light);
+        }
+
+        /* アニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .academy-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .steps-grid,
+            .features-grid,
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fixed-cta-content {
+                padding: 0.8rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">coboa</a>
+            <div class="academy-title">coboa academy</div>
+            <a href="../index.html" class="company-link">会社情報</a>
+        </div>
+    </header>
+
+    <!-- ヒーロー -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>君だけの、"挑戦"を記そう。</h1>
+            <p class="hero-subtitle">スマホで簡単に!!</p>
+            <div class="hero-description">
+                <p>目標を持ち、考え、記録する。</p>
+                <p>スポーツから学ぶ、君だけの成長ストーリー。</p>
+            </div>
+            <a href="mailto:contact@coboa-inc.com?subject=coboa academy 資料請求・お問い合わせ" class="cta-button">資料請求｜お問い合わせ</a>
+        </div>
+    </section>
+
+    <!-- サービス概要 -->
+    <section class="section service-overview">
+        <div class="container">
+            <h2 class="section-title fade-in">coboa academyとは</h2>
+            <p class="service-description fade-in">
+                「coboa academy」は、スポーツを頑張る小中高生が「目標」を持ち、目標達成のために何が必要かを「考え」、実行した経験を「記録」するアプリです。
+            </p>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>目標</h3>
+                    <p>明確な目標設定で<br>やる気をアップ</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>考え</h3>
+                    <p>目標達成のために<br>何が必要かを考える</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>記録</h3>
+                    <p>実行した経験を<br>しっかりと記録</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 課題提示 */
+    <section class="section problems">
+        <div class="container">
+            <h2 class="section-title fade-in">こんなお悩みありませんか？</h2>
+            <div class="problems-grid">
+                <div class="problem-card fade-in">
+                    <div class="problem-illustration">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>目標を決めたけど忘れちゃう。</h3>
+                    <p>せっかく立てた目標も、日々の練習で忘れがち...</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <div class="problem-illustration">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>一度目標設定ワークをしたがそれっきりに...</h3>
+                    <p>継続的な指導とフォローアップが課題</p>
+                </div>
+                <div class="problem-card fade-in">
+                    <div class="problem-illustration">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>スポーツから色んな学びを得てほしい。</h3>
+                    <p>技術だけでなく、人間的成長も大切にしたい</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3ステップ -->
+    <section class="section steps">
+        <div class="container">
+            <h2 class="section-title fade-in">3つのステップで簡単スタート</h2>
+            <p class="section-subtitle fade-in">複雑な操作は一切なし。誰でも簡単に始められます</p>
+            <div class="steps-grid">
+                <div class="step-card fade-in">
+                    <div class="step-number">1</div>
+                    <h3>LINEで通知が届く</h3>
+                    <p>定期的にリマインダーが届くので、目標を忘れずに継続できます</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">2</div>
+                    <h3>アプリでカンタン記録</h3>
+                    <p>スマホで簡単に練習内容や気づきを記録。わずか数分で完了</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">3</div>
+                    <h3>目標への進捗が一目でわかる</h3>
+                    <p>視覚的なグラフで成長を実感。モチベーションもアップ</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="mailto:contact@coboa-inc.com?subject=coboa academy 利用開始について" class="cta-button fade-in">始めてみる</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入実績 -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">福岡・九州を中心に導入中！</h2>
+            <p class="section-subtitle fade-in">多くの学校・クラブチームで選手の成長をサポートしています</p>
+            <div class="reviews-grid">
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-title">○○中学校 野球部</div>
+                        <div class="review-location">福岡市</div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">
+                        "選手たちの目標意識が格段に向上しました。練習に対する取り組みが変わった！"
+                    </p>
+                    <p class="reviewer">- 田中コーチ</p>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-title">△△高校 サッカー部</div>
+                        <div class="review-location">北九州市</div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">
+                        "親として子どもの成長が見えるようになり、適切なサポートができています。"
+                    </p>
+                    <p class="reviewer">- 保護者 佐藤様</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA セクション -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2 class="section-title fade-in">あなたのチームも始めてみませんか？</h2>
+            <p class="section-subtitle fade-in">1ヶ月間の無料トライアルでお試しいただけます</p>
+            <a href="mailto:contact@coboa-inc.com?subject=coboa academy 無料トライアル希望" class="cta-button fade-in">無料で試してみる</a>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq">
+        <div class="container">
+            <h2 class="section-title fade-in">よくあるご質問</h2>
+            <p class="section-subtitle fade-in">お客様からよく寄せられるご質問にお答えします</p>
+            <div class="faq-list">
+                <div class="faq-item fade-in">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        まずはサービスを試したい！
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        1ヶ月間の無料トライアルをご用意しております。お気軽にお問い合わせください。
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        指導者と選手がLINEで繋がるの、、？
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        いいえ、指導者と選手が直接LINEで繋がることはありません。システムを通じて安全にコミュニケーションを取ることができます。
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        料金体系について教えてください
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        チーム規模や利用期間に応じて柔軟な料金プランをご用意しております。詳細はお問い合わせください。
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        導入までにどのくらい時間がかかりますか？
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        お申し込みから1週間程度で導入が可能です。セットアップのサポートも行っております。
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="mailto:contact@coboa-inc.com?subject=coboa academy お問い合わせ" class="cta-button fade-in">お問い合わせする</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>株式会社coboa</h3>
+                <p>代表取締役　蔵元勇翔</p>
+                <p>お問い合わせ：<a href="mailto:contact@coboa-inc.com" class="footer-email">contact@coboa-inc.com</a></p>
+                <a href="../index.html" class="footer-button">会社HPへ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 固定フッター CTA -->
+    <div class="fixed-cta">
+        <div class="fixed-cta-content">
+            <a href="mailto:contact@coboa-inc.com?subject=coboa academy 資料請求・お問い合わせ" class="fixed-cta-button">資料請求｜お問い合わせ</a>
+        </div>
+    </div>
+
+    <script>
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // スクロールアニメーション
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ アコーディオン
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            // すべてのFAQを閉じる
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if (ans !== answer) {
+                    ans.classList.remove('show');
+                }
+            });
+            
+            document.querySelectorAll('.faq-question i').forEach(ic => {
+                if (ic !== icon) {
+                    ic.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // 選択されたFAQを開閉
+            answer.classList.toggle('show');
+            
+            if (answer.classList.contains('show')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // ヘッダーの背景を動的に変更
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社coboa｜アスリートの過程を最大化させる</title>
+    <meta name="description" content="アスリートの過程を最大化させる。スポーツで繋がる、スポーツが繋がる。株式会社coboaは小中高生向けのスポーツアプリcoboa academyと大学生アスリートのキャリア支援事業を展開しています。">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #cc0b0a;
+            --text-color: #333;
+            --background-white: #ffffff;
+            --gray-light: #f8f9fa;
+            --box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            transition: 0.3s;
+        }
+
+        /* モバイルメニュー */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: var(--box-shadow);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-menu li {
+            padding: 0.5rem 1rem;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        /* ヒーロー */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://via.placeholder.com/1920x1080/666666/ffffff?text=Hero+Background+Image') center/cover;
+            /* TODO: 写真に差し替え予定 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+        }
+
+        /* セクション共通 */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+
+        /* 事業内容 */
+        .services {
+            background: var(--gray-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .service-card p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #a30909;
+        }
+
+        .coming-soon {
+            background: #ccc;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* 代表紹介 */
+        .about-ceo {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .ceo-image {
+            width: 100%;
+            height: 400px;
+            background: url('https://via.placeholder.com/400x400/cccccc/ffffff?text=CEO+Photo') center/cover;
+            /* TODO: 代表の写真に差し替え予定 */
+            border-radius: 10px;
+        }
+
+        .ceo-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .ceo-info p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .ceo-history {
+            list-style: none;
+        }
+
+        .ceo-history li {
+            padding: 0.5rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .ceo-history li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* 私たちの想い */
+        .vision {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://via.placeholder.com/1920x600/888888/ffffff?text=Vision+Background') center/cover;
+            /* TODO: 背景写真に差し替え予定 */
+            color: white;
+            text-align: center;
+        }
+
+        .vision-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .vision-message {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* 会社情報 */
+        .company-info {
+            background: var(--gray-light);
+        }
+
+        .company-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .company-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .company-table th,
+        .company-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .company-table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            width: 200px;
+        }
+
+        /* お問い合わせ */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            text-align: center;
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .about-ceo {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .company-table table {
+                font-size: 0.9rem;
+            }
+
+            .company-table th {
+                width: 120px;
+            }
+
+            .company-table th,
+            .company-table td {
+                padding: 1rem;
+            }
+        }
+
+        /* アニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">coboa</a>
+            <nav>
+                <ul class="nav">
+                    <li><a href="#services">事業内容</a></li>
+                    <li><a href="#ceo">代表紹介</a></li>
+                    <li><a href="#company">会社情報</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <ul>
+                    <li><a href="#services" onclick="closeMenu()">事業内容</a></li>
+                    <li><a href="#ceo" onclick="closeMenu()">代表紹介</a></li>
+                    <li><a href="#company" onclick="closeMenu()">会社情報</a></li>
+                    <li><a href="#contact" onclick="closeMenu()">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーロー -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>アスリートの過程を最大化させる。</h1>
+            <p>スポーツで繋がる、スポーツが繋がる。</p>
+        </div>
+    </section>
+
+    <!-- 事業内容 -->
+    <section class="section services" id="services">
+        <div class="container">
+            <h2 class="section-title fade-in">事業内容</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>coboa academy</h3>
+                    <p>小中高生向け</p>
+                    <p>小中高生のアスリートが日々の目標や振り返りを記録し、競技の過程を可視化するアプリ『coboa academy』を提供しています。</p>
+                    <a href="academy/index.html" class="btn">詳しく見る</a>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="coming-soon">Coming Soon</span>
+                    <h3>大学生アスリートのキャリア支援事業</h3>
+                    <p>体育会学生の競技経験をキャリアに変える。大学アスリートに特化した就職支援事業を展開中です。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 代表紹介 -->
+    <section class="section" id="ceo">
+        <div class="container">
+            <h2 class="section-title fade-in">代表紹介</h2>
+            <div class="about-ceo">
+                <div class="ceo-image fade-in"></div>
+                <div class="ceo-info fade-in">
+                    <h3>蔵元勇翔（クラモト ユウト）／22歳</h3>
+                    <p>今年3月に福岡大学を卒業。8歳から22歳までサッカーを継続。新卒で複数企業から内定を得たが、学生時代の原体験から起業を決意し、株式会社coboaを設立。</p>
+                    <ul class="ceo-history">
+                        <li>福岡大学附属大濠高校 卒業</li>
+                        <li>福岡大学 商学部 卒業</li>
+                        <li>「FUKUDAI SOCCER FESTIVAL 2024」企画立案・責任者</li>
+                        <li>クラウドファンディング140万円達成</li>
+                        <li>UNIVAS AWARDS 2024-25 優秀賞 受賞</li>
+                        <li>アビスパ福岡 社会課題プロジェクト 学生インターン</li>
+                        <li>「VISION SUMMIT 2024」運営</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 私たちの想い -->
+    <section class="section vision">
+        <div class="container">
+            <h2 class="section-title fade-in">私たちの想い</h2>
+            <p class="vision-quote fade-in">ライバルとの争い。試合の勝敗。プロになれるかなれないか。</p>
+            <p class="vision-message fade-in">"結果"が全てであるアスリートの"プロセス"に価値を創出する。</p>
+        </div>
+    </section>
+
+    <!-- 会社情報 -->
+    <section class="section company-info" id="company">
+        <div class="container">
+            <h2 class="section-title fade-in">会社情報</h2>
+            <div class="company-table fade-in">
+                <table>
+                    <tr>
+                        <th>社名</th>
+                        <td>株式会社coboa</td>
+                    </tr>
+                    <tr>
+                        <th>設立</th>
+                        <td>2025年4月</td>
+                    </tr>
+                    <tr>
+                        <th>代表者</th>
+                        <td>蔵元勇翔</td>
+                    </tr>
+                    <tr>
+                        <th>お問い合わせ</th>
+                        <td>contact@coboa-inc.com</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">お問い合わせ</h2>
+            <form class="contact-form fade-in" action="mailto:contact@coboa-inc.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">お名前</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">メールアドレス</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">件名</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">メッセージ</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-submit">
+                    <button type="submit" class="btn">送信する</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">利用規約</a>
+            </div>
+            <p>&copy; 2025 株式会社coboa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ハンバーガーメニュー
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+        }
+
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // スクロールアニメーション
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ヘッダーの背景を動的に変更
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
