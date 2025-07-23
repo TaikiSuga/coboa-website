@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー｜株式会社coboa</title>
+    <meta name="description" content="株式会社coboaのプライバシーポリシーです。個人情報の取り扱いについて説明しています。">
+    <style>
+        :root {
+            --primary-color: #cc0b0a;
+            --text-color: #333;
+            --background-white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e5e7eb;
+            --border-gray: #d1d5db;
+            --box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: var(--gray-light);
+        }
+
+        /* ヘッダー */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--background-white);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .home-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .home-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* メインコンテンツ */
+        .main {
+            margin-top: 100px;
+            padding: 2rem 0 4rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .content-card {
+            background: var(--background-white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 1rem;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--gray-light);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+
+        .section-content ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .contact-info strong {
+            color: var(--primary-color);
+        }
+
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .date-info {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-medium);
+        }
+
+        /* フッター */
+        .footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 印刷用CSS */
+        @media print {
+            .header {
+                position: static;
+                box-shadow: none;
+                border-bottom: 1px solid #000;
+            }
+
+            .main {
+                margin-top: 0;
+            }
+
+            .content-card {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+
+            .page-title {
+                color: #000;
+                border-bottom-color: #000;
+            }
+
+            .section-title {
+                color: #000;
+                border-left-color: #000;
+            }
+
+            .intro-text {
+                background: #f0f0f0;
+                border-left-color: #000;
+            }
+
+            .contact-info {
+                background: #f0f0f0;
+            }
+
+            .footer {
+                background: #000;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .header-container {
+                padding: 0 0.5rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* スクロールスムース */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">coboa</a>
+            <a href="index.html" class="home-link">ホームへ戻る</a>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <div class="container">
+            <div class="content-card">
+                <h1 class="page-title">プライバシーポリシー</h1>
+                
+                <div class="intro-text">
+                    株式会社coboa（以下「当社」）は、以下のプライバシーポリシーに基づき、個人情報の保護に努めます。
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title">1. 個人情報の定義</h2>
+                    <div class="section-content">
+                        <p>個人情報とは、個人を識別できる情報を指します。</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">2. 個人情報の収集</h2>
+                    <div class="section-content">
+                        <p><strong>収集する情報：</strong></p>
+                        <ul>
+                            <li>氏名、メールアドレス、電話番号</li>
+                            <li>学校名、学年、部活動・競技情報</li>
+                            <li>サービス利用履歴</li>
+                            <li>お問い合わせ内容</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">3. 個人情報の利用目的</h2>
+                    <div class="section-content">
+                        <ul>
+                            <li>サービスの提供・運営</li>
+                            <li>お問い合わせへの対応</li>
+                            <li>サービスの改善・新サービスの開発</li>
+                            <li>重要なお知らせの送信</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">4. 個人情報の第三者提供</h2>
+                    <div class="section-content">
+                        <p>当社は、以下の場合を除き、個人情報を第三者に提供しません：</p>
+                        <ul>
+                            <li>本人の同意がある場合</li>
+                            <li>法令に基づく場合</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">5. 個人情報の管理</h2>
+                    <div class="section-content">
+                        <ul>
+                            <li>適切なセキュリティ対策を実施</li>
+                            <li>不正アクセス、紛失、破損、改ざん、漏洩の防止</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">6. Cookieの使用</h2>
+                    <div class="section-content">
+                        <ul>
+                            <li>サービス向上のためCookieを使用する場合があります</li>
+                            <li>ブラウザ設定で無効化可能です</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">7. お問い合わせ</h2>
+                    <div class="section-content">
+                        <p>個人情報に関するお問い合わせ：</p>
+                        <div class="contact-info">
+                            <strong>株式会社coboa</strong><br>
+                            メール: <a href="mailto:contact@coboa-inc.com">contact@coboa-inc.com</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">8. プライバシーポリシーの変更</h2>
+                    <div class="section-content">
+                        <ul>
+                            <li>必要に応じて本ポリシーを変更することがあります</li>
+                            <li>変更はWebサイトで通知します</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="date-info">
+                    <p>制定日: 2025年4月1日</p>
+                    <p>最終更新日: 2025年4月1日</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 株式会社coboa. All rights reserved.</p>
+            <a href="index.html">ホームへ戻る</a>
+        </div>
+    </footer>
+</body>
+</html>
