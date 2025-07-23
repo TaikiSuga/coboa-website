@@ -64,6 +64,14 @@
             margin-right: 0.5rem;
         }
 
+        /* ダークモード対策用の背景 */
+        .dark-mode-safe {
+            background: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
         /* 画像ロゴがない場合のフォールバック */
         .logo::before {
             content: '';
@@ -562,14 +570,13 @@
     <header class="header">
         <div class="header-container">
             <a href="../index.html" class="logo">
-                <!-- 画像ロゴを使用する場合は下記のコメントアウトを外して、../images/coboa-logo.png に画像を配置してください -->
-                <!-- <img src="../images/coboa-logo.png" alt="coboa"> -->
+                <img src="../images/coboa-logo.png" alt="coboa">
                 coboa
             </a>
             <div class="academy-title">
-                <!-- academy画像ロゴを使用する場合は下記のコメントアウトを外して、../images/coboa-academy-logo.png に画像を配置してください -->
-                <!-- <img src="../images/coboa-academy-logo.png" alt="coboa academy" class="academy-logo"> -->
-                coboa academy
+                <span class="dark-mode-safe">
+                    <img src="../images/coboa-academy-logo.png" alt="coboa academy" class="academy-logo">
+                </span>
             </div>
             <a href="../index.html" class="company-link">会社情報</a>
         </div>
