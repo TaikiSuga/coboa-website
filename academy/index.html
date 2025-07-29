@@ -346,6 +346,20 @@
             color: var(--text-color);
         }
 
+        .step-image {
+            width: 200px;
+            max-width: 80%;
+            height: auto;
+            margin: 1.5rem auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .step-image:hover {
+            transform: scale(1.05);
+        }
+
         .step-card p {
             line-height: 1.7;
             color: #555;
@@ -682,17 +696,20 @@
                 <div class="step-card fade-in">
                     <div class="step-number">1</div>
                     <h3>LINEで通知が届く</h3>
-                    <p>定期的にリマインダーが届くので、目標を忘れずに継続できます</p>
+                    <p>「忘れてた。」がなくなります。</p>
+                    <img src="../images/step1-notification.png" alt="LINEで通知が届く画面" class="step-image">
                 </div>
                 <div class="step-card fade-in">
                     <div class="step-number">2</div>
-                    <h3>アプリでカンタン記録</h3>
-                    <p>スマホで簡単に練習内容や気づきを記録。わずか数分で完了</p>
+                    <h3>使いやすく分かりやすい</h3>
+                    <p>めんどくさくない。カンタン入力。</p>
+                    <img src="../images/step2-recording.png" alt="アプリでカンタン記録画面" class="step-image">
                 </div>
                 <div class="step-card fade-in">
                     <div class="step-number">3</div>
-                    <h3>目標への進捗が一目でわかる</h3>
-                    <p>視覚的なグラフで成長を実感。モチベーションもアップ</p>
+                    <h3>進み具合がすぐ見える</h3>
+                    <p>だから続く。記録が楽しくなる！</p>
+                    <img src="../images/step3-progress.png" alt="目標への進捗表示画面" class="step-image">
                 </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;">
