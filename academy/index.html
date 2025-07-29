@@ -127,8 +127,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), 
-                        url('https://via.placeholder.com/1920x1080/4a90e2/ffffff?text=Athletics+Track+Background') center/cover;
-            /* TODO: 陸上トラックの写真に差し替え予定 */
+                        url('../images/athletics-track.png') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -347,13 +346,39 @@
         }
 
         .step-image {
-            width: 200px;
-            max-width: 80%;
+            width: 220px;
+            max-width: 85%;
             height: auto;
-            margin: 1.5rem auto;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin: 1.2rem auto 0;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
             transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 480px) {
+            .step-image {
+                width: 260px;
+                max-width: 80%;
+                margin: 1.5rem auto 0;
+                border-radius: 18px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .step-image {
+                width: 300px;
+                max-width: 90%;
+                margin: 1.8rem auto 0;
+                border-radius: 20px;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .step-image {
+                width: 320px;
+                margin: 2rem auto 0;
+            }
         }
 
         .step-image:hover {
@@ -582,6 +607,10 @@
             .features-grid,
             .problems-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .step-card {
+                padding: 2rem 1.5rem;
             }
 
             .fixed-cta-content {

@@ -150,8 +150,7 @@
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://via.placeholder.com/1920x1080/666666/ffffff?text=Hero+Background+Image') center/cover;
-            /* TODO: 写真に差し替え予定 */
+                        url('images/hero-background.png') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -302,7 +301,7 @@
 
         /* 私たちの想い */
         .vision {
-            background: linear-gradient(135deg, var(--primary-color), #a30909);
+            background: linear-gradient(135deg, var(--primary-color), #8b0000);
             color: white;
             text-align: center;
         }
@@ -311,14 +310,18 @@
             font-size: 1.2rem;
             font-style: italic;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .vision-message {
             font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: 700;
             line-height: 1.4;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+
 
         /* 会社情報 */
         .company-info {
